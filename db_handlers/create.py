@@ -2,7 +2,7 @@ import sqlite3
 
 def create_db():
     """Создаем базу данных и таблицу, если их нет"""
-    conn = sqlite3.connect('db/reminders.db')  # Создаем базу данных (файл)
+    conn = sqlite3.connect('db/beard_bot_DB.db')  # Создаем базу данных (файл)
     cursor = conn.cursor()
 
     # Создаем таблицу для хранения напоминаний (если таблица не существует)
