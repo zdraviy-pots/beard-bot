@@ -10,9 +10,6 @@ config.py
 data/
 *.sqlite3
 
-data/
-*.db
-
 *.db
 
 # Лог-файлы и кеши
