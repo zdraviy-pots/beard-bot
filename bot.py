@@ -2,32 +2,25 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
-from aiogram.types import FSInputFile
 
-import os
-from dotenv import load_dotenv
+from config import API_TOKEN, DATABASE_URL, admins
+from services.sheduler import start_scheduler
+from handlers.start import start_router
+from handlers.reminders import reminders_router
 
-from emoji import emojize as em
-
-load_dotenv()
-logging.basicConfig(level=logging.INFO)
-
-API_TOKEN = os.getenv("BOT_TOKEN")
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
-@dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    BG_logo = FSInputFile("images/BG_logo.jpg")
-
-    await message.answer_photo(
-        BG_logo,
-        caption=em("Привет!:waving_hand:\n\nЯ помогу тебе быстрее отрастить бороду и волосы. Буду напоминать тебе использовать средство и следить за результатами.\n\nВыбери удобное время для напоминаний:")
-    )
-
-# Запуск процесса поллинга новых апдейтов
 async def main():
+    dp.include_router(start_router)
+    dp.include_router(reminders_router)
+
+    await start_scheduler()
+    
+    await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
