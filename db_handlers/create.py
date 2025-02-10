@@ -27,6 +27,4 @@ def create_db():
     conn.commit()
     conn.close()
 
-def conn
-
 create_db()
