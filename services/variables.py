@@ -1,5 +1,3 @@
-import sqlite3
-
 timezones = [
     (2, 'Калининград', '+2'),
     (3, 'Москва', '+3'),
@@ -13,19 +11,3 @@ timezones = [
     (11, 'Магадан', '+11'),
     (12, 'Камчатка', '+12'),
 ]
-
-def add_timezones():
-    conn = sqlite3.connect('db/beard_bot_DB.db')
-    cursor = conn.cursor()
-
-    cursor.executemany(
-        '''
-        INSERT INTO timezones (timezone_id, title, offset_utc)
-        VALUES (?, ?, ?)
-        ''', timezones
-    )
-    
-    conn.commit()
-    conn.close()
-
-add_timezones()
