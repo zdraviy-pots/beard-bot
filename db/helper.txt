@@ -3,3 +3,7 @@ python=3.12.8
 Emojize:
 :waving_hand:
 :check_mark_button:
+
+screen -S bot_session
+source /home/project/venv/bin/activate
+python3 /home/project/beard-bot/bot.py
