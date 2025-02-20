@@ -94,7 +94,6 @@ async def fulltime(call: CallbackQuery, bot: Bot):
     time_M = c_data[3]
 
     time_To = time_H+':'+time_M
-    time_To = '01:39'
 
     mesag = ''
     if get_first_time_save(user_id)[0] == 'not yet':
