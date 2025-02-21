@@ -12,8 +12,8 @@ def set_time_inline_kb():
 
 def get_serum_inline_kb(user_id):
     inline_kb_list = [
-        [InlineKeyboardButton(text=em(":check_mark_button: Принял средство"), callback_data=f'used_{str(user_id)}')],
-        [InlineKeyboardButton(text=em(":multiply: Пропуск"), callback_data=f'used_{str(user_id)}')]
+        [InlineKeyboardButton(text=em(":check_mark_button: Принял средство"), callback_data=f'used_{str(user_id)}_not')],
+        [InlineKeyboardButton(text=em(":multiply: Пропуск"), callback_data=f'used_{str(user_id)}_yes')]
     ]
     return InlineKeyboardMarkup(inline_keyboard=inline_kb_list)
 
