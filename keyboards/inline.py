@@ -84,8 +84,8 @@ def timezones_kb(selected_time=None):
 
 def menu_kb(user_id):
     inline_kb_list = [
-        [InlineKeyboardButton(text="Сменить время\nнапоминаний", callback_data="set_time")],
-        [InlineKeyboardButton(text="Выбрать другой\nчасовой пояс", callback_data="set_timezone")]
+        [InlineKeyboardButton(text="Сменить время напоминаний", callback_data="set_time")],
+        [InlineKeyboardButton(text="Выбрать другой часовой пояс", callback_data="set_timezone")]
     ]
     if str(user_id) in admins:
         inline_kb_list.append([InlineKeyboardButton(text=em(":loudspeaker: Отправить сообщение"), callback_data="send_notify")])
