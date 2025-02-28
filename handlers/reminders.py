@@ -13,7 +13,7 @@ from services.states import NotifyState
 reminders_router = Router()
 
 async def send_reminder(user_id, bot: Bot):
-    await bot.send_message(user_id, text="Пора применить средство для роста бороды!", reply_markup=get_serum_inline_kb(user_id))
+    await bot.send_message(user_id, text="Пора принять наш коктейль для роста волос!", reply_markup=get_serum_inline_kb(user_id))
 
 @reminders_router.callback_query(lambda c: c.data.startswith('used_'))
 async def serum_used(call: CallbackQuery):
