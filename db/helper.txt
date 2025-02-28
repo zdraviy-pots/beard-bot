@@ -11,3 +11,6 @@ ctrl+a d
 
 screen -ls
 screen -X -S <идентификатор сеанса> quit
+
+cd /home/project/beard-bot
+git pull origin main
