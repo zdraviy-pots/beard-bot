@@ -4,13 +4,16 @@ Emojize:
 :waving_hand:
 :check_mark_button:
 
+cd /home/project/beard-bot
+git pull origin main
+
+screen -ls
+screen -X -S <ид> quit
+
 screen -S bot_session
 source /home/project/venv/bin/activate
 python3 /home/project/beard-bot/bot.py
 ctrl+a d
 
-screen -ls
-screen -X -S <идентификатор сеанса> quit
 
-cd /home/project/beard-bot
-git pull origin main
+
