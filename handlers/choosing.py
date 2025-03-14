@@ -78,7 +78,7 @@ async def choose_time_of_day(call: CallbackQuery):
     time_H = c_data[3]
 
     await call.message.edit_caption(
-        caption=generate_caption_choosing(call.data, 'минуты'),
+        caption=generate_caption_choosing(time_period, 'минуты'),
         reply_markup=get_time_of_day_kb(time_period, time_H)
     )
 
