@@ -54,4 +54,6 @@ async def cmd_start(call: CallbackQuery, state: FSMContext):
         caption=text,
         reply_markup=rm
         )
+    
+    await call.answer()
     await state.clear()
