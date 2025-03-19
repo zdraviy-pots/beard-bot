@@ -11,6 +11,6 @@ screen -ls
 screen -X -S <ид> quit
 
 screen -S bot_session
-source /home/project/venv/bin/activate
-python3 /home/project/beard-bot/bot.py
+source /home/beard-bot/venv/bin/activate
+python3 /home/beard-bot/bot.py
 ctrl+a d

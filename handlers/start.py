@@ -38,10 +38,16 @@ async def cmd_start(message: Message, state: FSMContext):
 @start_router.callback_query(lambda c: c.data == "to_menu")
 async def cmd_start(call: CallbackQuery, state: FSMContext):
     user_id = call.from_user.id
-    BG_logo = FSInputFile("images/BG_logo.jpg")
+    save_user(user_id)
 
-    text=generate_menu_caption(user_id)
-    rm=menu_kb(user_id)
+    BG_logo = FSInputFile("images/BG_logo.jpg")
+    
+    if get_first_time_save(call.from_user.id)[0] =='not yet':
+        text=em("Привет!:waving_hand:\n\nЯ помогу тебе быстрее отрастить бороду и волосы. Буду напоминать тебе использовать средство и следить за результатами.\n\nДавай выберем удобное время для напоминаний. Но для начала укажи свой часовой пояс:") 
+        rm=timezones_kb()
+    else:
+        text=generate_menu_caption(user_id)
+        rm=menu_kb(user_id)
         
     await call.message.answer_photo(
         BG_logo,
@@ -49,4 +55,3 @@ async def cmd_start(call: CallbackQuery, state: FSMContext):
         reply_markup=rm
         )
     await state.clear()
-    await call.answer()
