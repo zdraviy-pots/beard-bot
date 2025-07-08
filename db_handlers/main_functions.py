@@ -79,6 +79,29 @@ def get_user(user_id):
 
     return user_data
 
+def get_total_users():
+    conn = sqlite3.connect('db/beard_bot_DB.db')
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT COUNT(*) FROM users')
+    total = cursor.fetchone()[0]
+
+    conn.close()
+    return total
+
+def get_users_with_get_all_status():
+    conn = sqlite3.connect('db/beard_bot_DB.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        SELECT COUNT(*) FROM users
+        WHERE first_time_save = "get all"
+    ''')
+    users = cursor.fetchone()[0]
+
+    conn.close()
+    return users
+
 def del_time(user_id):
     conn = sqlite3.connect('db/beard_bot_DB.db')
     cursor = conn.cursor()

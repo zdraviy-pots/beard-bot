@@ -89,6 +89,7 @@ def menu_kb(user_id):
     ]
     if str(user_id) in admins:
         inline_kb_list.append([InlineKeyboardButton(text=em(":loudspeaker: Отправить сообщение"), callback_data="send_notify")])
+        inline_kb_list.append([InlineKeyboardButton(text=em(":bar_chart: Статистика"), callback_data="show_stat")])
 
     return InlineKeyboardMarkup(inline_keyboard=inline_kb_list)
 

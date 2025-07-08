@@ -4,10 +4,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, ContentType
 from aiogram.filters import StateFilter
 
-from db_handlers.main_functions import get_all_user_chat_ids
+from db_handlers.main_functions import get_all_user_chat_ids, get_total_users, get_users_with_get_all_status
 from filters.is_admin import IsAdmin
 from config import admins
-from keyboards.inline import get_serum_inline_kb, to_menu_kb
+from keyboards.inline import get_serum_inline_kb, menu_kb, to_menu_kb
 from services.states import NotifyState
 
 reminders_router = Router()
@@ -24,6 +24,26 @@ async def serum_used(call: CallbackQuery):
 async def send_notify(call: CallbackQuery, state: FSMContext):
     await call.message.answer("Напишите сообщение для рассылки всем пользователям.\nДопустимые форматы:\n- сообщение\n- фото\n- голосовое\n- кружок\n- видео\n- документ\n- аудио", reply_markup=to_menu_kb())
     await state.set_state(NotifyState.waiting_for_message)
+    await call.answer()
+
+@reminders_router.callback_query(lambda c: c.data == "show_stat", IsAdmin(admins))
+async def send_notify(call: CallbackQuery):
+    user_id = call.from_user.id
+    total_users = get_total_users()
+    get_all_users = get_users_with_get_all_status()
+
+    text = (
+        f"📊 <b>Статистика</b>\n\n"
+        f"👥 Общее количество пользователей: <b>{total_users}</b>\n"
+        f"📨 Активные пользователи: <b>{get_all_users}</b>"
+    )
+
+    await call.message.edit_caption(
+        caption=text,
+        reply_markup=to_menu_kb(),
+        parse_mode='HTML'
+        )
+
     await call.answer()
 
 @reminders_router.message(IsAdmin(admins), StateFilter(NotifyState.waiting_for_message))

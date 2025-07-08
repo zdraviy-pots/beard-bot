@@ -2,7 +2,6 @@ from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
 from aiogram.types import FSInputFile
-from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from emoji import emojize as em
 
